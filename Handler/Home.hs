@@ -18,6 +18,7 @@ getHomeR = do
         handlerName = "getHomeR" :: Text
     defaultLayout $ do
         aDomId <- newIdent
+        --maid <- maybeAuthId
         setTitle "Welcome To Yesod!"
         $(widgetFile "homepage")
 
