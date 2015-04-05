@@ -5,7 +5,9 @@ import Database.Persist.Sql (ConnectionPool, runSqlPool)
 import Text.Hamlet          (hamletFile)
 import Text.Jasmine         (minifym)
 import Yesod.Auth.BrowserId (authBrowserId)
-import Yesod.Auth.OAuth2.Google
+import qualified Facebook as FB
+import Yesod.Facebook
+import Yesod.Auth.Facebook.ServerSide
 import Yesod.Default.Util   (addStaticContentExternal)
 import Yesod.Core.Types     (Logger)
 import qualified Yesod.Core.Unsafe as Unsafe
@@ -112,6 +114,10 @@ instance YesodPersist App where
 instance YesodPersistRunner App where
     getDBRunner = defaultGetDBRunner appConnPool
 
+instance YesodFacebook App where
+    fbCredentials _ = FB.Credentials "Mafia" "950770731634762" "634b9f56a93bcef57fd71694e2f684ca" 
+    fbHttpManager = getHttpManager
+
 instance YesodAuth App where
     type AuthId App = UserId
 
@@ -133,7 +139,7 @@ instance YesodAuth App where
                     }
 
     -- You can add other plugins like BrowserID, email or OAuth here
-    authPlugins _ = [authBrowserId def, oauth2Google "28883635133-r76dab2oudkj68fgpcgop34n7vegnjq8.apps.googleusercontent.com" "fIpKxrgFHn7rqpXw3kCbitmY"]
+    authPlugins _ = [authBrowserId def, authFacebook ["user_about_me", "email", "offline_access"] ]
 
     authHttpManager = getHttpManager
 

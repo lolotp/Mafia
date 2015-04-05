@@ -1,4 +1,4 @@
-<h1>Welcome to Yesod!
+<h1>Welcome to Yesod! #{show maid}
 
 <a href=@{AuthR LoginR}>Go to the login page
 

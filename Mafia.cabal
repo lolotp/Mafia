@@ -50,7 +50,9 @@ library
                  , yesod                         >= 1.4.1      && < 1.5
                  , yesod-core                    >= 1.4.6      && < 1.5
                  , yesod-auth                    >= 1.4.0      && < 1.5
-                 , yesod-auth-oauth2             >= 0.0.12
+                 , fb                            >= 1.0.8
+                 , yesod-fb                      >= 0.3.4
+                 , yesod-auth-fb                 >= 1.6.6
                  , yesod-static                  >= 1.4.0.3    && < 1.5
                  , yesod-form                    >= 1.4.0      && < 1.5
                  , classy-prelude                >= 0.10.2
