@@ -139,7 +139,7 @@ instance YesodAuth App where
                     }
 
     -- You can add other plugins like BrowserID, email or OAuth here
-    authPlugins _ = [authBrowserId def, authFacebook ["user_about_me", "email", "offline_access"] ]
+    authPlugins _ = [authBrowserId def, authFacebook ["public_profile", "email", "user_friends"] ]
 
     authHttpManager = getHttpManager
 
