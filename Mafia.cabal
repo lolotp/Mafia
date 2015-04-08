@@ -84,6 +84,7 @@ library
                  , containers
                  , vector
                  , time
+                 , transformers
 
 executable         Mafia
     if flag(library-only)

@@ -1,8 +1,12 @@
 module Handler.Home where
 
+import Control.Monad.Trans.Maybe
 import Import
 import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3,
                               withSmallInput)
+import Yesod.Auth.Facebook.ServerSide (getUserAccessToken)
+import Yesod.Facebook (runYesodFbT)
+import Facebook
 
 -- This is a handler function for the GET request method on the HomeR
 -- resource pattern. All of your resource patterns are defined in
@@ -13,8 +17,11 @@ import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3,
 -- inclined, or create a single monolithic file.
 getHomeR :: Handler Html
 getHomeR = do
+    maybeUser <- runMaybeT $ do
+        accessToken <- MaybeT $ getUserAccessToken
+        lift $ runYesodFbT $ getUser (Id "me") [] $ Just accessToken
+        
     (formWidget, formEnctype) <- generateFormPost sampleForm
-    maid <- maybeAuthId
     let submission = Nothing :: Maybe (FileInfo, Text)
         handlerName = "getHomeR" :: Text
     defaultLayout $ do
@@ -24,7 +31,9 @@ getHomeR = do
 
 postHomeR :: Handler Html
 postHomeR = do
-    maid <- maybeAuthId
+    maybeUser <- runMaybeT $ do
+        accessToken <- MaybeT $ getUserAccessToken
+        lift $ runYesodFbT $ getUser (Id "me") [] $ Just accessToken
     ((result, formWidget), formEnctype) <- runFormPost sampleForm
     let handlerName = "postHomeR" :: Text
         submission = case result of

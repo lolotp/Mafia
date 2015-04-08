@@ -4,7 +4,6 @@ import Import.NoFoundation
 import Database.Persist.Sql (ConnectionPool, runSqlPool)
 import Text.Hamlet          (hamletFile)
 import Text.Jasmine         (minifym)
-import Yesod.Auth.BrowserId (authBrowserId)
 import qualified Facebook as FB
 import Yesod.Facebook
 import Yesod.Auth.Facebook.ServerSide
@@ -139,7 +138,7 @@ instance YesodAuth App where
                     }
 
     -- You can add other plugins like BrowserID, email or OAuth here
-    authPlugins _ = [authBrowserId def, authFacebook ["public_profile", "email", "user_friends"] ]
+    authPlugins _ = [authFacebook ["public_profile", "email", "user_friends"] ]
 
     authHttpManager = getHttpManager
 
