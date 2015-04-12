@@ -4,12 +4,14 @@ import Import.NoFoundation
 import Database.Persist.Sql (ConnectionPool, runSqlPool)
 import Text.Hamlet          (hamletFile)
 import Text.Jasmine         (minifym)
-import qualified Facebook as FB
 import Yesod.Facebook
 import Yesod.Auth.Facebook.ServerSide
 import Yesod.Default.Util   (addStaticContentExternal)
 import Yesod.Core.Types     (Logger)
 import qualified Yesod.Core.Unsafe as Unsafe
+
+import qualified Facebook as FB
+import qualified Config.Facebook as FacebookConfig
 
 -- | The foundation datatype for your application. This can be a good place to
 -- keep settings and values requiring initialization before your application
@@ -114,7 +116,7 @@ instance YesodPersistRunner App where
     getDBRunner = defaultGetDBRunner appConnPool
 
 instance YesodFacebook App where
-    fbCredentials _ = FB.Credentials "Mafia" "950770731634762" "634b9f56a93bcef57fd71694e2f684ca" 
+    fbCredentials _ = FB.Credentials FacebookConfig.appName FacebookConfig.appId FacebookConfig.appSecret 
     fbHttpManager = getHttpManager
 
 instance YesodAuth App where
