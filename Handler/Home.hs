@@ -1,7 +1,8 @@
 module Handler.Home where
 
-import Control.Monad.Trans.Maybe
 import Import
+
+import Control.Monad.Trans.Maybe
 import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3,
                               withSmallInput)
 import Yesod.Auth.Facebook.ServerSide (getUserAccessToken)

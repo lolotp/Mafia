@@ -1,5 +1,5 @@
 name:              Mafia
-version:           0.0.0
+version:           0.0.1
 cabal-version:     >= 1.8
 build-type:        Simple
 
@@ -22,6 +22,7 @@ library
                      Settings.StaticFiles
                      Handler.Common
                      Handler.Home
+                     Handler.Games
                      Config.Facebook
 
     if flag(dev) || flag(library-only)

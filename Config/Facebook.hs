@@ -11,4 +11,5 @@ appId :: Text
 appId = "950770731634762"
 
 appSecret :: Text
-appSecret = "634b9f56a93bcef57fd71694e2f684ca"
+appSecret = "660c262cc33dfde56742fd40622fa1ce"
+
