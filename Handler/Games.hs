@@ -12,8 +12,8 @@ getGamesR = do
 postGamesR :: Handler TypedContent
 postGamesR = do
     Just uid <- maybeAuthId
-    game <- requireJsonBody :: Handler Game
-    --let game2 = game { gameUser = uid }
+    submittedGame <- requireJsonBody :: Handler Game
+    let game = submittedGame { gameCreator = uid }
     selectRep $ do
         provideRep $ return $ toJSON game
         
