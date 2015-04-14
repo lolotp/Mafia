@@ -1,5 +1,7 @@
 <h1>Welcome to Yesod! #{show maybeUser}
 
+<p>#{show maid}
+
 <a href=@{AuthR LoginR}>Go to the login page
 
 <ol>

@@ -9,10 +9,12 @@ getGamesR = do
         setTitle "Games list"
         $(widgetFile "games")
 
-postGamesR :: Handler Html
+postGamesR :: Handler TypedContent
 postGamesR = do
-    defaultLayout $ do
-        aDomId <- newIdent
-        setTitle "Games list"
-        $(widgetFile "games")
-
+    Just uid <- maybeAuthId
+    game <- requireJsonBody :: Handler Game
+    --let game2 = game { gameUser = uid }
+    selectRep $ do
+        provideRep $ return $ toJSON game
+        
+ 

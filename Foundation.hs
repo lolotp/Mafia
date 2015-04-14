@@ -75,6 +75,7 @@ instance Yesod App where
     isAuthorized (AuthR _) _ = return Authorized
     isAuthorized FaviconR _ = return Authorized
     isAuthorized RobotsR _ = return Authorized
+    isAuthorized GamesR True = isLoggedIn
     -- Default to Authorized for now.
     isAuthorized _ _ = return Authorized
 
@@ -105,6 +106,12 @@ instance Yesod App where
             || level == LevelError
 
     makeLogger = return . appLogger
+
+isLoggedIn = do
+    maid <- maybeAuthId
+    return $ case maid of
+        Nothing -> AuthenticationRequired
+        _ -> Authorized
 
 -- How to run database actions.
 instance YesodPersist App where

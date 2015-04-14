@@ -18,6 +18,7 @@ import Facebook
 -- inclined, or create a single monolithic file.
 getHomeR :: Handler Html
 getHomeR = do
+    maid <- maybeAuthId
     maybeUser <- runMaybeT $ do
         accessToken <- MaybeT $ getUserAccessToken
         lift $ runYesodFbT $ getUser (Id "me") [] $ Just accessToken
@@ -32,6 +33,7 @@ getHomeR = do
 
 postHomeR :: Handler Html
 postHomeR = do
+    maid <- maybeAuthId
     maybeUser <- runMaybeT $ do
         accessToken <- MaybeT $ getUserAccessToken
         lift $ runYesodFbT $ getUser (Id "me") [] $ Just accessToken
