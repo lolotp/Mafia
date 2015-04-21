@@ -14,6 +14,8 @@ postGamesR = do
     Just uid <- maybeAuthId
     submittedGame <- requireJsonBody :: Handler Game
     let game = submittedGame { gameCreator = uid }
+    runDB $ do
+        insert game
     selectRep $ do
         provideRep $ return $ toJSON game
         
