@@ -1,3 +1,4 @@
+{-# LANGUAGE ScopedTypeVariables #-}
 module Handler.Games where
 
 import Import
@@ -11,12 +12,14 @@ getGamesR = do
 
 postGamesR :: Handler TypedContent
 postGamesR = do
-    Just uid <- maybeAuthId
-    submittedGame <- requireJsonBody :: Handler Game
-    let game = submittedGame { gameCreator = uid }
-    runDB $ do
-        insert game
+    --Just uid <- maybeAuthId
+    -- $(logInfo) "parsed submitted game"
+    -- submittedGame <- requireJsonBody :: Handler Game
+    -- let game = submittedGame { gameCreator = uid }
+    -- gameId <- runDB $ do
+    --    insert game
+    let num :: Int = 42
     selectRep $ do
-        provideRep $ return $ toJSON game
+        provideRep $ return $ toJSON num
         
  
