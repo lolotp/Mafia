@@ -12,14 +12,12 @@ getGamesR = do
 
 postGamesR :: Handler TypedContent
 postGamesR = do
-    --Just uid <- maybeAuthId
-    -- $(logInfo) "parsed submitted game"
-    -- submittedGame <- requireJsonBody :: Handler Game
-    -- let game = submittedGame { gameCreator = uid }
-    -- gameId <- runDB $ do
-    --    insert game
-    let num :: Int = 42
-    selectRep $ do
-        provideRep $ return $ toJSON num
-        
+     Just uid <- maybeAuthId
+     $(logInfo) "parsed submitted game"
+     submittedGame <- requireJsonBody :: Handler Game
+     let game = submittedGame { gameCreator = uid }
+     gameId <- runDB $ do
+        insert game
+     selectRep $ do
+        provideRep $ return $ toJSON game
  

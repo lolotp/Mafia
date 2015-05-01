@@ -1,13 +1,15 @@
 document.getElementById(#{toJSON aDomId}).innerHTML = "This text was added by the Javascript part of the homepage widget.";
 $(document).ready(function() {
   console.log("document is ready");
-  $.ajax({
-    type: "POST",
-    url: "http://mafia.haskell.com/games/",
-    data: { name: "test", description: "test", creator: 0, cycleLength: 24*3600, numberOfCycles: 3, startTime: new Date() },
-    success: function(data) {
-      console.log("post successful game: ", data);
-    },
-    dataType: "application/json"
-  });
+  $.post("/games",
+    JSON.stringify({
+      name: "test",
+      description: "test",
+      creator: 0,
+      cycleLength: 24*3600,
+      numberOfCycles: 3,
+      startTime: new Date()
+    }),
+    function(data) { console.log("data is ", data); },
+    "json");
 });

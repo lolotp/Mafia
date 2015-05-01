@@ -6,4 +6,4 @@
 
 / HomeR GET POST
 
-/games GamesR POST
+/games GamesR POST GET
